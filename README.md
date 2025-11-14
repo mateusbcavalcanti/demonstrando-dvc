@@ -1,57 +1,81 @@
 # Demonstração de DVC + CI/CD + MLFlow
 
-
 ## DVC
 ### Versionamento de dados e pipeline
-Inicialização:
+
+#### Neste respotiório será abordada a utilização de uma pasta local como storage de arquivos do DVC, de modo a contornar o problema do google drive e facilitar o entendimento.
+
+Clone este repositório em uma pasta fora do one drive para não ter erros durante a atualização de cache do dvc.
 ```
-dvc init
-git add .dvc .gitignore
+git clone git@github.com:mateusbcavalcanti/demonstrando-dvc.git
 ```
 
-Adicionar dados ao controle do DVC:
+Crie a pasta onde o dvc armazenará os dados em qualquer local da sua máquina, por ex em documentos:
 ```
-dvc add data/raw/dataset.csv
-git add data/raw/dataset.csv.dvc
+mkdir {seu-caminho-ate-documentos}/storage dvc teste
 ```
 
-Isso cria um arquivo .dvc que referencia o dataset. Você pode enviar o dataset para um remote (Google Drive, S3, etc.):
+Defina a sua nova pasta de teste como o remote do dvc:
 ```
-dvc remote add -d myremote gdrive://<folder-id>
+#entre na pasta raiz do projeto
+dvc remote add -d local_remote {seu-caminho-ate-documentos}/storage dvc teste
+```
+Como é a primeira vez que estamos executando o código, os conjuntos de treinamento e de validação ainda não estão na pasta data.
+Por isso, é necessário rodar o script 'preprocess.py', então execute-o.
+
+```
+python src/preprocess.py
+```
+
+Agora que os dados foram gerados, vamos adicioná-los ao controle do DVC:
+```
+dvc add data/train
+dvc add data/val
+git add data/val.dvc data/train.dvc
+```
+
+Isso cria um arquivo .dvc que referencia o dataset. Agora que temos tudo, podemos dar um push que irá armazenar os arquivos na nossa pasta de storage teste.:
+```
 dvc push
 ```
-
+Para testar se está funcionando mesmo, após o push, apague os datasets de treino e validacao e dê um dvc pull na pasta raiz.
+Se os arquivos voltarem, deu certo! :)
+```
+dvc pull
+```
+Então para salvar isso no git hub, faça um commit.
+```
+git add .
+git commit -m "Fazendo configuração do dvc"
+git push origin main
+```
 ### Pipeline DVC
-Arquivo `pipelines/dvc.yaml`:
+Arquivo `dvc.yaml`:
 ```
 stages:
-  preprocess:
-    cmd: python src/preprocess.py data/raw/dataset.csv data/processed/clean.csv
-    deps:
-      - src/preprocess.py
-      - data/raw/dataset.csv
-    outs:
-      - data/processed/clean.csv
-
+  # preprocess:
+  #   cmd: pip install mlflow
   train:
-    cmd: python src/train.py data/processed/clean.csv models/model.pkl
+    cmd: python src/train.py data/train/ data/val/ models/model.pkl
     deps:
       - src/train.py
-      - data/processed/clean.csv
+      - data/train/
+      - data/val/
     outs:
       - models/model.pkl
     metrics:
       - metrics/metrics.json
-      - metrics/plots/roc_curve.png
+      # - metrics/plots/roc_curve.png
 
-  evaluate:
-    cmd: python src/evaluate.py models/model.pkl data/processed/clean.csv
-    deps:
-      - src/evaluate.py
-      - models/model.pkl
+  # evaluate:
+  #   cmd: python src/evaluate.py
+  #   deps:
+  #     - src/evaluate.py
+  #     - metrics/metrics.json
+
 ```
 
-Executar pipeline:
+Execute esse comando para que o dvc possa ser o responsável por rodar todo o código, como é definido na pipeline:
 ```
 dvc repro
 ```

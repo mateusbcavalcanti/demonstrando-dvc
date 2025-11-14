@@ -213,8 +213,9 @@ __marimo__/
 #dados modelo metricas
 data/train/
 data/val/
-models/
-metrics/
+models/model.pkl
+metrics/metrics.json
+mlruns/
 
 # Ignorar cache do DVC local
 .dvc/cache/

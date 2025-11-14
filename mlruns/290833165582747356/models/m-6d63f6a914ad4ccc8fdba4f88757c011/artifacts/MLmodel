@@ -1,0 +1,23 @@
+artifact_path: file:///C:/Users/matcavalcanti/OneDrive%20-%20Deloitte%20%28O365D%29/Documentos/C%C3%B3digos/Bootcamp/semana%203/desmonstrando-dvc/mlruns/290833165582747356/models/m-6d63f6a914ad4ccc8fdba4f88757c011/artifacts
+flavors:
+  python_function:
+    config:
+      device: null
+    data: data
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.pytorch
+    pickle_module_name: mlflow.pytorch.pickle_module
+    python_version: 3.12.4
+  pytorch:
+    code: null
+    model_data: data
+    pytorch_version: 2.9.0+cpu
+mlflow_version: 3.6.0
+model_id: m-6d63f6a914ad4ccc8fdba4f88757c011
+model_size_bytes: 31123703
+model_uuid: m-6d63f6a914ad4ccc8fdba4f88757c011
+prompts: null
+run_id: 4e4334226f6a4af2a5d8ea12efcd2219
+utc_time_created: '2025-11-13 19:49:36.991464'

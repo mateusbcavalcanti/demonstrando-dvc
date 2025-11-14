@@ -1,0 +1,10 @@
+artifact_location: file:///C:/Users/matcavalcanti/OneDrive%20-%20Deloitte%20%28O365D%29/Documentos/C%C3%B3digos/Bootcamp/semana%203/desmonstrando-dvc/mlruns/290833165582747356/models/m-132f265f64a045ad853259b754c3c4d1/artifacts
+creation_timestamp: 1763132891136
+experiment_id: '290833165582747356'
+last_updated_timestamp: 1763132930015
+model_id: m-132f265f64a045ad853259b754c3c4d1
+model_type: null
+name: model
+source_run_id: 23c286683dce412982eaac1ec9046674
+status: 2
+status_message: null
