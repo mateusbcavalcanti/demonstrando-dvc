@@ -215,7 +215,7 @@ data/train/
 data/val/
 models/model.pkl
 metrics/metrics.json
-mlruns/
+.mlruns/
 
 # Ignorar cache do DVC local
 .dvc/cache/
