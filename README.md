@@ -5,8 +5,9 @@
 
 #### Neste respotiório será abordada a utilização de uma pasta local como storage de arquivos do DVC, de modo a contornar o problema do google drive e facilitar o entendimento.
 
-Clone este repositório em uma pasta fora do one drive para não ter erros durante a atualização de cache do dvc.
+Clone ou dê um fork neste repositório em uma pasta fora do one drive para não ter erros durante a atualização de cache do dvc.
 ```
+#fork eh pela interface, se optar por ele clone o seu repositorio onde foi dado o fork
 git clone git@github.com:mateusbcavalcanti/demonstrando-dvc.git
 ```
 
@@ -34,7 +35,7 @@ dvc add data/val
 git add data/val.dvc data/train.dvc
 ```
 
-Isso cria um arquivo .dvc que referencia o dataset. Agora que temos tudo, podemos dar um push que irá armazenar os arquivos na nossa pasta de storage teste.:
+Isso cria um arquivo .dvc que referencia o dataset. Agora que temos tudo, podemos dar um push que irá armazenar os arquivos na nossa pasta de storage teste.
 ```
 dvc push
 ```
