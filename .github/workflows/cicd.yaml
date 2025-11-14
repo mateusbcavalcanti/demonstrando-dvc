@@ -23,12 +23,12 @@ jobs:
           pip install -r requirements.txt
           pip install dvc[gs] mlflow
 
-#      - name: Reproduce DVC pipeline
-#        run: dvc repro
+     - name: Reproduce DVC pipeline
+       run: dvc repro
 
-#      - name: Push updated metrics
-#        run: |
-#          dvc push
-#          git add metrics/ dvc.lock
-#          git commit -m "Update metrics after pipeline run" || echo "No changes"
-#          git push
+     - name: Push updated metrics
+       run: |
+         dvc push
+         git add metrics/ dvc.lock
+         git commit -m "Update metrics after pipeline run" || echo "No changes"
+         git push
