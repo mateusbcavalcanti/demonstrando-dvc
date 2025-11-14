@@ -1,0 +1,28 @@
+schema: '2.0'
+stages:
+  train:
+    cmd: python src/train.py data/train/ data/val/ models/model.pkl
+    deps:
+    - path: data/train/
+      hash: md5
+      md5: bd550aace82ff9c436a4dcb0d872c75b.dir
+      size: 62224
+      nfiles: 200
+    - path: data/val/
+      hash: md5
+      md5: 836f5b8eac1fdea451921d6c3c0b7347.dir
+      size: 6533
+      nfiles: 20
+    - path: src/train.py
+      hash: md5
+      md5: c39370434c576441900ed933a290c9b3
+      size: 5254
+    outs:
+    - path: metrics/metrics.json
+      hash: md5
+      md5: 09c26348a8e8d2d8e8e98321c3ef8c99
+      size: 154
+    - path: models/model.pkl
+      hash: md5
+      md5: 40013cfe67ee3d2f366f6b4bc32f82a5
+      size: 31108635

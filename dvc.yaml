@@ -1,0 +1,20 @@
+stages:
+  # preprocess:
+  #   cmd: pip install mlflow
+  train:
+    cmd: python src/train.py data/train/ data/val/ models/model.pkl
+    deps:
+      - src/train.py
+      - data/train/
+      - data/val/
+    outs:
+      - models/model.pkl
+    metrics:
+      - metrics/metrics.json
+      # - metrics/plots/roc_curve.png
+
+  # evaluate:
+  #   cmd: python src/evaluate.py
+  #   deps:
+  #     - src/evaluate.py
+  #     - metrics/metrics.json

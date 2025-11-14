@@ -5,16 +5,19 @@ import mlflow
 import time
 import torch.nn as nn
 import numpy as np
+import sys
 
 from torch.utils.data import DataLoader
 from model import UNet
 from loader import SyntheticSegDataset
 
+from preprocess import save_dataset
+
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 print('Device:', device)
 
 
-def train_model(model, train_loader, val_loader, epochs=10, lr=1e-3):
+def train_model(model, train_loader, val_loader, out_path, epochs=10, lr=1e-3):
     model = model.to(device)
     optimizer = torch.optim.Adam(model.parameters(), lr=lr)
     criterion = nn.CrossEntropyLoss()
@@ -46,6 +49,10 @@ def train_model(model, train_loader, val_loader, epochs=10, lr=1e-3):
         history['train_loss'].append(epoch_loss)
         history['val_loss'].append(val_loss)
         print(f'Epoch {epoch + 1}/{epochs} - train_loss: {epoch_loss:.4f} - val_loss: {val_loss:.4f}')
+    
+    os.makedirs(os.path.dirname(out_path), exist_ok=True)
+    torch.save(model.state_dict(), out_path)
+
     return history
 
 
@@ -80,8 +87,16 @@ def calculate_dice(preds, targets, num_classes):
 if __name__=='__main__':
     """
     """
-    train_ds = SyntheticSegDataset('../data', 'train')
-    val_ds = SyntheticSegDataset('../data', 'val')
+    
+    train_data_path = sys.argv[1]
+    val_data_path = sys.argv[2]
+    out_path = sys.argv[3]
+
+    print(train_data_path)
+
+    train_ds = SyntheticSegDataset(train_data_path)
+    val_ds = SyntheticSegDataset(val_data_path)
+
 
     train_loader = DataLoader(train_ds, batch_size=4, shuffle=True, num_workers=0)
     val_loader = DataLoader(val_ds, batch_size=2, shuffle=False, num_workers=0)
@@ -95,7 +110,7 @@ if __name__=='__main__':
 
         start = time.time()
         print("Training U-Net...")
-        history_unet = train_model(unet, train_loader, val_loader, epochs=10, lr=1e-3)
+        history_unet = train_model(unet, train_loader, val_loader, out_path, epochs=3, lr=1e-3)
         time_unet = time.time() - start
 
         unet.eval()

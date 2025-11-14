@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/matcavalcanti/OneDrive%20-%20Deloitte%20%28O365D%29/Documentos/C%C3%B3digos/Bootcamp/semana%203/desmonstrando-dvc/mlruns/290833165582747356/23c286683dce412982eaac1ec9046674/artifacts
+end_time: 1763132930103
+entry_point_name: ''
+experiment_id: '290833165582747356'
+lifecycle_stage: active
+run_id: 23c286683dce412982eaac1ec9046674
+run_name: popular-dove-478
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1763132811376
+status: 3
+tags: []
+user_id: matcavalcanti

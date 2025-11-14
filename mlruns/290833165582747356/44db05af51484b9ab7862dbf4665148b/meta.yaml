@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/matcavalcanti/OneDrive%20-%20Deloitte%20%28O365D%29/Documentos/C%C3%B3digos/Bootcamp/semana%203/desmonstrando-dvc/mlruns/290833165582747356/44db05af51484b9ab7862dbf4665148b/artifacts
+end_time: 1763131497851
+entry_point_name: ''
+experiment_id: '290833165582747356'
+lifecycle_stage: active
+run_id: 44db05af51484b9ab7862dbf4665148b
+run_name: adventurous-ant-601
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1763131325967
+status: 3
+tags: []
+user_id: matcavalcanti

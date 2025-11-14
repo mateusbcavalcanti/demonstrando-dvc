@@ -1,3 +1,16 @@
 # Add patterns of files dvc should ignore, which could improve
 # the performance. Learn more at
 # https://dvc.org/doc/user-guide/dvcignore
+
+
+# Arquivos do Windows
+Thumbs.db
+desktop.ini
+
+# Checkpoints de notebooks
+.ipynb_checkpoints/
+
+# Arquivos temporários
+*.tmp
+~$*
+

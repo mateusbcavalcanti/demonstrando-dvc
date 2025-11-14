@@ -7,9 +7,9 @@ from PIL import Image
 
 
 class SyntheticSegDataset(Dataset):
-    def __init__(self, root, split='train', transform=None):
-        self.img_dir = os.path.join(root, split, 'images')
-        self.mask_dir = os.path.join(root, split, 'masks')
+    def __init__(self, root, transform=None):
+        self.img_dir = os.path.join(root, 'images')
+        self.mask_dir = os.path.join(root, 'masks')
         self.files = sorted([f for f in os.listdir(self.img_dir) if f.endswith('.png')])
         self.transform = transform
 
@@ -27,3 +27,5 @@ class SyntheticSegDataset(Dataset):
         img = torch.from_numpy(img.transpose(2,0,1)).float()
         mask = torch.from_numpy(mask).long()
         return img, mask
+
+
